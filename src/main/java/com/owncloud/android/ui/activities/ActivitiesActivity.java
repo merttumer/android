@@ -19,13 +19,11 @@
 package com.owncloud.android.ui.activities;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nextcloud.client.network.ClientFactory;
@@ -79,9 +77,6 @@ public class ActivitiesActivity extends FileActivity implements ActivityListInte
     @BindView(R.id.empty_list_icon)
     public ImageView emptyContentIcon;
 
-    @BindView(R.id.empty_list_progress)
-    public ProgressBar emptyContentProgressBar;
-
     @BindView(android.R.id.list)
     public RecyclerView recyclerView;
 
@@ -130,7 +125,6 @@ public class ActivitiesActivity extends FileActivity implements ActivityListInte
 
         // Since we use swipe-to-refresh for progress indication we can hide the inherited
         // progressBar, message and headline
-        emptyContentProgressBar.setVisibility(View.GONE);
         emptyContentMessage.setVisibility(View.INVISIBLE);
         emptyContentHeadline.setVisibility(View.INVISIBLE);
     }
@@ -154,8 +148,6 @@ public class ActivitiesActivity extends FileActivity implements ActivityListInte
      */
     private void setupContent() {
         emptyContentIcon.setImageResource(R.drawable.ic_activity);
-        emptyContentProgressBar.getIndeterminateDrawable().setColorFilter(ThemeUtils.primaryAccentColor(this),
-                                                                          PorterDuff.Mode.SRC_IN);
 
         FileDataStorageManager storageManager = new FileDataStorageManager(getAccount(), getContentResolver());
         adapter = new ActivityListAdapter(this,
@@ -285,9 +277,7 @@ public class ActivitiesActivity extends FileActivity implements ActivityListInte
     public void showLoadingMessage() {
         emptyContentHeadline.setText(R.string.file_list_loading);
         emptyContentMessage.setText("");
-
         emptyContentIcon.setVisibility(View.GONE);
-        emptyContentProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -295,8 +285,6 @@ public class ActivitiesActivity extends FileActivity implements ActivityListInte
         if (emptyContentContainer != null && emptyContentMessage != null) {
             emptyContentHeadline.setText(headline);
             emptyContentMessage.setText(message);
-
-            emptyContentProgressBar.setVisibility(View.GONE);
             emptyContentIcon.setVisibility(View.VISIBLE);
             emptyContentHeadline.setVisibility(View.VISIBLE);
             emptyContentMessage.setVisibility(View.VISIBLE);

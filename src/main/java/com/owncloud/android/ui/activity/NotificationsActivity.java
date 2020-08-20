@@ -25,14 +25,12 @@
 package com.owncloud.android.ui.activity;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -91,9 +89,6 @@ public class NotificationsActivity extends FileActivity implements Notifications
 
     @BindView(R.id.empty_list_icon)
     public ImageView emptyContentIcon;
-
-    @BindView(R.id.empty_list_progress)
-    public ProgressBar emptyContentProgressBar;
 
     @BindView(android.R.id.list)
     public RecyclerView recyclerView;
@@ -239,8 +234,6 @@ public class NotificationsActivity extends FileActivity implements Notifications
      */
     private void setupContent() {
         emptyContentIcon.setImageResource(R.drawable.ic_notification);
-        emptyContentProgressBar.getIndeterminateDrawable().setColorFilter(ThemeUtils.primaryAccentColor(this),
-                                                                          PorterDuff.Mode.SRC_IN);
         setLoadingMessage();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -340,9 +333,7 @@ public class NotificationsActivity extends FileActivity implements Notifications
     private void setLoadingMessage() {
         emptyContentHeadline.setText(R.string.notifications_loading_activity);
         emptyContentMessage.setText("");
-
         emptyContentIcon.setVisibility(View.GONE);
-        emptyContentProgressBar.setVisibility(View.VISIBLE);
     }
 
     @VisibleForTesting
@@ -351,8 +342,6 @@ public class NotificationsActivity extends FileActivity implements Notifications
             emptyContentHeadline.setText(headline);
             emptyContentMessage.setText(message);
             emptyContentMessage.setVisibility(View.VISIBLE);
-
-            emptyContentProgressBar.setVisibility(View.GONE);
             emptyContentIcon.setImageResource(R.drawable.ic_notification);
             emptyContentIcon.setVisibility(View.VISIBLE);
         }

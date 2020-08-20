@@ -46,7 +46,6 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,10 +57,10 @@ import com.nextcloud.client.account.User;
 import com.nextcloud.client.account.UserAccountManager;
 import com.nextcloud.client.di.Injectable;
 import com.nextcloud.client.files.downloader.Direction;
-import com.nextcloud.client.files.downloader.Transfer;
-import com.nextcloud.client.files.downloader.TransferState;
-import com.nextcloud.client.files.downloader.TransferManagerConnection;
 import com.nextcloud.client.files.downloader.Request;
+import com.nextcloud.client.files.downloader.Transfer;
+import com.nextcloud.client.files.downloader.TransferManagerConnection;
+import com.nextcloud.client.files.downloader.TransferState;
 import com.nextcloud.client.jobs.BackgroundJobManager;
 import com.nextcloud.client.network.ClientFactory;
 import com.owncloud.android.R;
@@ -136,9 +135,6 @@ public class ContactListFragment extends FileFragment implements Injectable {
 
     @BindView(R.id.empty_list_icon)
     public ImageView emptyContentIcon;
-
-    @BindView(R.id.empty_list_progress)
-    public ProgressBar emptyContentProgressBar;
 
     @BindView(R.id.empty_list_container)
     public RelativeLayout emptyListContainer;
@@ -317,7 +313,6 @@ public class ContactListFragment extends FileFragment implements Injectable {
         emptyContentMessage.setText("");
 
         emptyContentIcon.setVisibility(View.GONE);
-        emptyContentProgressBar.setVisibility(View.VISIBLE);
     }
 
     private void setSelectAllMenuItem(MenuItem selectAll, boolean checked) {
